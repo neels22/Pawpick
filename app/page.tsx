@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { fetchItems, castVote, type Item } from '@/lib/api'
+import { getOrCreateSessionId } from '@/lib/session'
 import ProgressHeader from '@/components/ProgressHeader'
 import SwipeCard from '@/components/SwipeCard'
 import ResultsView from '@/components/ResultsView'
@@ -20,11 +21,7 @@ export default function Home() {
 
   // 1. Session initialization
   useEffect(() => {
-    let id = localStorage.getItem('sessionId')
-    if (!id) {
-      id = crypto.randomUUID()
-      localStorage.setItem('sessionId', id)
-    }
+    const id = getOrCreateSessionId()
     setSessionId(id)
   }, [])
 

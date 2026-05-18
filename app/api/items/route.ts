@@ -30,7 +30,9 @@ export async function GET(request: NextRequest) {
       userChoice: null
     }))
 
-    return NextResponse.json({ items: itemsWithChoice })
+    return NextResponse.json({ items: itemsWithChoice }, {
+      headers: { 'Cache-Control': 'no-store, max-age=0' }
+    })
   } catch (error) {
     console.error('Error fetching items:', error)
     return NextResponse.json({ error: 'Server error' }, { status: 500 })

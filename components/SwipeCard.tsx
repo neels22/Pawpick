@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useMotionValue, useTransform, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import type { Item } from '@/lib/api'
 
 interface SwipeCardProps {
@@ -20,6 +20,18 @@ export default function SwipeCard({ item, onVote, onOpenResults }: SwipeCardProp
   const yesLabelOpacity = useTransform(x, [0, 50, 100], [0, 0.3, 1])
   const noLabelOpacity = useTransform(x, [-100, -50, 0], [1, 0.3, 0])
 
+  // Reset state when item changes (new card rendered)
+  useEffect(() => {
+    setExiting(null)
+    x.set(0)
+  }, [item.id, x])
+
+  const triggerVote = useCallback((choice: 'yes' | 'no') => {
+    const direction = choice === 'yes' ? 'right' : 'left'
+    setExiting(direction)
+    setTimeout(() => onVote(choice), 300)
+  }, [onVote])
+
   function handleDragEnd(
     _event: MouseEvent | TouchEvent | PointerEvent,
     info: { offset: { x: number; y: number } }
@@ -32,15 +44,13 @@ export default function SwipeCard({ item, onVote, onOpenResults }: SwipeCardProp
 
     // Right swipe → Yes
     if (info.offset.x > 100) {
-      setExiting('right')
-      setTimeout(() => onVote('yes'), 300)
+      triggerVote('yes')
       return
     }
 
     // Left swipe → No
     if (info.offset.x < -100) {
-      setExiting('left')
-      setTimeout(() => onVote('no'), 300)
+      triggerVote('no')
       return
     }
 
@@ -49,16 +59,12 @@ export default function SwipeCard({ item, onVote, onOpenResults }: SwipeCardProp
 
   // Programmatic vote from buttons
   function handleButtonVote(choice: 'yes' | 'no') {
-    setExiting(choice === 'yes' ? 'right' : 'left')
-    setTimeout(() => onVote(choice), 300)
+    triggerVote(choice)
   }
-
-  const exitX = exiting === 'right' ? 500 : exiting === 'left' ? -500 : 0
-  const exitRotate = exiting === 'right' ? 20 : exiting === 'left' ? -20 : 0
 
   return (
     <div className="w-full flex flex-col items-center gap-6">
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="popLayout">
         <motion.div
           key={item.id}
           drag
@@ -67,12 +73,13 @@ export default function SwipeCard({ item, onVote, onOpenResults }: SwipeCardProp
           onDragEnd={handleDragEnd}
           style={{ x, rotate }}
           initial={{ scale: 0.95, opacity: 0 }}
-          animate={
-            exiting
-              ? { x: exitX, rotate: exitRotate, opacity: 0, transition: { duration: 0.3 } }
-              : { scale: 1, opacity: 1, transition: { duration: 0.3 } }
-          }
-          exit={{ x: exitX, rotate: exitRotate, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1, transition: { duration: 0.3 } }}
+          exit={{
+            x: exiting === 'right' ? 500 : exiting === 'left' ? -500 : 0,
+            rotate: exiting === 'right' ? 20 : exiting === 'left' ? -20 : 0,
+            opacity: 0,
+            transition: { duration: 0.3 },
+          }}
           className="relative w-full max-w-[380px] h-[560px] bg-surface-container-highest rounded-[24px] ambient-shadow overflow-hidden flex flex-col cursor-grab active:cursor-grabbing touch-none select-none"
         >
           {/* Pet Image */}

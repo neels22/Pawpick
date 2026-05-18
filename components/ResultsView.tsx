@@ -136,6 +136,11 @@ export default function ResultsView({ onBackToSwipe }: ResultsViewProps) {
                       favorite
                     </span>
                   </div>
+                  <div className="flex items-center gap-1.5 text-[11px]">
+                    <span className="text-green-600 font-bold">{item.yesCount}Y</span>
+                    <span className="text-on-surface-variant/40">·</span>
+                    <span className="text-red-500 font-bold">{item.noCount}N</span>
+                  </div>
                   <span className="text-[11px] text-on-surface-variant">
                     {item.totalVotes} vote{item.totalVotes !== 1 ? 's' : ''}
                   </span>

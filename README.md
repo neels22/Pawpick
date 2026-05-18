@@ -1,36 +1,145 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🐾 PawPick — Swipe to Adopt
 
-## Getting Started
+A mobile-first, swipe-to-vote web application where users browse cards of fictional adoptable pets and cast a **Yes** or **No** vote on whether they would adopt each one. Every vote is persisted to a real backend database, and a public results view surfaces aggregate community sentiment.
 
-First, run the development server:
+---
+
+## 🚀 How to Run
+
+### Prerequisites
+
+- **Node.js** ≥ 18
+- **npm** ≥ 9
+
+### Setup & Run
 
 ```bash
+# 1. Clone the repository
+git clone <repo-url>
+cd Pawpick
+
+# 2. Install dependencies
+npm install
+
+# 3. Run database migration
+npx prisma migrate dev --name init
+
+# 4. Seed the database (creates 100 pets + SVGs)
+npm run db:seed
+
+# 5. Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.  
+For the best experience, use Chrome DevTools mobile view (390 × 844 px — iPhone 14 Pro).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🏗️ Architecture Overview
 
-## Learn More
+PawPick is built as a **full-stack vertical slice** using a single Next.js repository:
 
-To learn more about Next.js, take a look at the following resources:
+```
+┌──────────────────────────────────────────────────┐
+│  Frontend (React + Framer Motion)                │
+│  ┌──────────┐  ┌──────────┐  ┌───────────────┐  │
+│  │SwipeCard │  │EmptyDeck │  │ ResultsView   │  │
+│  │(gestures)│  │(end-deck)│  │ (leaderboard) │  │
+│  └────┬─────┘  └──────────┘  └───────┬───────┘  │
+│       │                              │           │
+│  ┌────▼──────────────────────────────▼───────┐   │
+│  │        lib/api.ts (fetch wrappers)        │   │
+│  └────┬──────────────┬───────────────┬───────┘   │
+├───────┼──────────────┼───────────────┼───────────┤
+│  API  │              │               │           │
+│  ┌────▼────┐  ┌──────▼─────┐  ┌─────▼───────┐   │
+│  │GET items│  │POST vote   │  │GET results  │   │
+│  │         │  │(upsert)    │  │(aggregated) │   │
+│  └────┬────┘  └──────┬─────┘  └─────┬───────┘   │
+│       │              │               │           │
+│  ┌────▼──────────────▼───────────────▼───────┐   │
+│  │          Prisma ORM (type-safe)           │   │
+│  └────────────────────┬──────────────────────┘   │
+│                       │                          │
+│  ┌────────────────────▼──────────────────────┐   │
+│  │           SQLite (dev.db file)            │   │
+│  └───────────────────────────────────────────┘   │
+└──────────────────────────────────────────────────┘
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Layer | Technology | Purpose |
+|---|---|---|
+| Framework | Next.js 16 (App Router) + TypeScript | Full-stack in one repo; API routes as backend |
+| Styling | Tailwind CSS 4 | Utility-first with custom design tokens |
+| Gestures | Framer Motion | Drag-to-swipe with spring physics, rotation, overlays |
+| Database | SQLite | Zero-config, file-based, demo-friendly |
+| ORM | Prisma | Type-safe queries, schema management, seed script |
+| Icons | Google Material Symbols | Consistent icon set via web font |
+| Images | Programmatically generated SVGs | 100 pet placeholders in `/public/items/` |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## ✅ Completed Requirements
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| # | Requirement | Status |
+|---|---|---|
+| 1 | 100 fictional pets seeded on fresh install | ✅ |
+| 2 | All votes round-trip to SQLite via API | ✅ |
+| 3 | One vote per sessionId + itemId (upsert dedup) | ✅ |
+| 4 | Swipe right = Yes, left = No, down = Results | ✅ |
+| 5 | Yes/No button fallback records same vote | ✅ |
+| 6 | Results accuracy reflects actual DB rows | ✅ |
+| 7 | Mobile layout at 390 × 844 (no overflow) | ✅ |
+| 8 | Desktop mouse drag triggers votes | ✅ |
+| 9 | Three sort modes: mostLoved, mostVoted, mostDivisive | ✅ |
+| 10 | All 100 SVGs load from /public/items/ | ✅ |
+| 11 | Loading state shown while fetching | ✅ |
+| 12 | Error state shown on API failure | ✅ |
+| 13 | Empty deck screen when all pets voted | ✅ |
+| 14 | Anonymous session via localStorage UUID | ✅ |
+| 15 | Already-voted pets filtered from deck | ✅ |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📁 Project Structure
+
+```
+/app
+  /api
+    /items/route.ts       # GET: items with session vote filtering
+    /vote/route.ts        # POST: record/upsert a vote
+    /results/route.ts     # GET: aggregate results with sort modes
+  page.tsx                # Root page — session init, state, views
+  layout.tsx              # App layout with fonts and metadata
+  globals.css             # Design tokens and custom utilities
+/components
+  SwipeCard.tsx           # Framer Motion draggable card with overlays
+  ProgressHeader.tsx      # Top bar: progress counter + Results nav
+  ResultsView.tsx         # Ranked leaderboard with sort tabs
+  EmptyDeck.tsx           # End-of-deck completion screen
+/lib
+  prisma.ts               # Prisma client singleton
+  session.ts              # Session ID utilities
+  api.ts                  # Frontend fetch wrappers + types
+/prisma
+  schema.prisma           # Item + Vote models
+  seed.ts                 # Generate 100 pets + SVGs
+/public
+  /items                  # 100 generated SVG pet images
+```
+
+---
+
+## 🐛 Known Issues
+
+- **SVG images are simple placeholders** — colored rectangles with a single letter, not real pet illustrations. This is by design per the PRD requirement for programmatically generated SVGs.
+- **Seed descriptions** have limited variety — names follow a template pattern (`"{Name} the {category}"`).
+- **No real-time updates** — the results view does not auto-refresh; data is fetched on each view switch.
+- **Error handling uses `window.alert()`** — intentionally minimal per PRD specification.
+
+---
+
+## 📄 License
+
+This project was built as a technical demonstration.
