@@ -93,7 +93,7 @@ PawPick is built as a **full-stack vertical slice** using a single Next.js repos
 | 7 | Mobile layout at 390 × 844 (no overflow) | ✅ |
 | 8 | Desktop mouse drag triggers votes | ✅ |
 | 9 | Three sort modes: mostLoved, mostVoted, mostDivisive | ✅ |
-| 10 | All 100 SVGs load from /public/items/ | ✅ |
+| 10 | All 100 pet images load correctly | ✅ |
 | 11 | Loading state shown while fetching | ✅ |
 | 12 | Error state shown on API failure | ✅ |
 | 13 | Empty deck screen when all pets voted | ✅ |
@@ -124,19 +124,18 @@ PawPick is built as a **full-stack vertical slice** using a single Next.js repos
   api.ts                  # Frontend fetch wrappers + types
 /prisma
   schema.prisma           # Item + Vote models
-  seed.ts                 # Generate 100 pets + SVGs
+  seed.ts                 # Generate 100 pets + reads from public/dogs/
 /public
-  /items                  # 100 generated SVG pet images
+  /dogs                   # Real pet images
 ```
 
 ---
 
 ## 🐛 Known Issues
 
-- **SVG images are simple placeholders** — colored rectangles with a single letter, not real pet illustrations. This is by design per the PRD requirement for programmatically generated SVGs.
-- **Seed descriptions** have limited variety — names follow a template pattern (`"{Name} the {category}"`).
 - **No real-time updates** — the results view does not auto-refresh; data is fetched on each view switch.
 - **Error handling uses `window.alert()`** — intentionally minimal per PRD specification.
+- **Pet categories mixed with dog images** — The database seed data includes categories like "cat" and "bird", but the images are populated from a user-provided `/public/dogs/` directory, resulting in some mismatched images and categories.
 
 ---
 

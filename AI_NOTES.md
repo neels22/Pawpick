@@ -6,7 +6,7 @@ An honest reflection on the use of AI tools during the development of PawPick.
 
 ## How AI Was Used
 
-AI coding assistants were used throughout the development of PawPick, primarily for:
+The **Antigravity AI Agent** (powered by the **Gemini** models) and various code-generation LLMs were used throughout the development of PawPick, primarily for:
 
 - **Project scaffolding** — Generating the initial component structure, Prisma schema, and seed script based on the PRD specification.
 - **API route implementation** — Drafting the three API endpoints (items, vote, results) including validation logic and sort algorithms.
