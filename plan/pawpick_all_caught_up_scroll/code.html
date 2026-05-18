@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PawPick - All Caught Up</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "surface": "#fff7f9",
+                        "on-tertiary-fixed-variant": "#005313",
+                        "surface-variant": "#eedee7",
+                        "secondary-container": "#fed0c3",
+                        "surface-container-high": "#f3e4ed",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#eedee7",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#fcecf5",
+                        "on-primary-container": "#782338",
+                        "on-tertiary-fixed": "#002204",
+                        "surface-container-low": "#ffeff8",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#fff7f9",
+                        "on-secondary-container": "#79574d",
+                        "error": "#ba1a1a",
+                        "primary": "#9c3f53",
+                        "secondary": "#79564c",
+                        "outline-variant": "#dac0c3",
+                        "surface-dim": "#e5d6df",
+                        "background": "#fff7f9",
+                        "primary-fixed-dim": "#ffb2bd",
+                        "outline": "#887274",
+                        "on-secondary-fixed": "#2d150e",
+                        "surface-tint": "#9c3f53",
+                        "tertiary-container": "#61c462",
+                        "secondary-fixed": "#ffdbd1",
+                        "surface-container": "#f9eaf2",
+                        "primary-fixed": "#ffd9dd",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#5f3f36",
+                        "on-tertiary-container": "#004e11",
+                        "on-surface-variant": "#554244",
+                        "on-surface": "#21191f",
+                        "tertiary": "#006e1c",
+                        "secondary-fixed-dim": "#e9bcb0",
+                        "tertiary-fixed-dim": "#78dc77",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#7e273c",
+                        "tertiary-fixed": "#94f990",
+                        "inverse-surface": "#372e34",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#400013",
+                        "inverse-primary": "#ffb2bd",
+                        "on-background": "#21191f",
+                        "primary-container": "#ff8da1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "card-padding": "24px",
+                        "gutter-mobile": "16px",
+                        "stack-gap": "12px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Quicksand"],
+                        "label-lg": ["Quicksand"],
+                        "body-lg": ["Quicksand"],
+                        "body-md": ["Quicksand"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md text-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-stack-gap">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-variant flex-shrink-0">
+<img alt="User Profile Photo" class="w-full h-full object-cover" data-alt="A high-quality, softly lit close-up portrait of a smiling person, used as a user profile avatar in a friendly, light-mode pet app. The background is a soft, warm neutral tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHJxjHeM5a8ZhgXOKYa9O1tjVEIsQPlUiKEGT-iO5i4VIvfkeuFbMVGyoVHviO0cNagGAWC1cT_rv8tWtkzuLQDy1j5VzcWJI5gFBxL-xN5dP-x8HXBp1jUijveZ73Dl_pKXI_bFFG-RDqDRecE15MUDjC3atr3iD70JqmKEJMg-U9uR7vkdzDBjtEwwSEASErwZHj75rD35bAYnbVsKoQ5Gm-jJzOdm-eKt7uERYoMTMcKXhUBxB7_7OQwcfQ3MMkCOdEOGcrwDI"/>
+</div>
+</div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary">PawPick</h1>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center pt-24 pb-32 px-margin-mobile w-full max-w-md mx-auto">
+<!-- Hero Card (Bento Style/Soft Depth) -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-card-padding flex flex-col items-center text-center gap-card-padding relative overflow-hidden shadow-[0_30px_60px_-15px_rgba(121,86,76,0.1)] border border-surface-variant/50">
+<!-- Illustration Container -->
+<div class="w-48 h-48 rounded-full bg-primary-container/30 flex items-center justify-center p-4 shadow-inner">
+<img alt="Sleeping Puppy Illustration" class="w-full h-full object-cover rounded-full shadow-lg" data-alt="A heartwarming, high-quality photograph of a tiny, fluffy puppy peacefully sleeping curled up in a perfect circle. The puppy is resting on a soft, textured cream-colored blanket. The lighting is incredibly soft, warm, and natural, creating a gentle, nurturing mood perfectly suited for a light-mode, pet-focused app UI. The colors are dominated by warm neutrals, soft pinks, and creamy whites." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh0WNUafCrmZaxmSLZqy9gNIDtsVBIFUsAFp1jausTVV-PwovSw444eYMf_jcj7gtAR7RbshBVoSuFY2oRaxOP8-AH6epy_RoW-JL_Uxog3W_6IlJXWvVW_p2hBo0x57G5O4H0YAvBr76ezbkyP8VzKoPwgK37eMTsVFEPOJI7tvmYPKNP0kMgIyCS5q1esX0q1FvoCzmMYWd81bsRpSjdHZFj_1Wn-ztCwGCZ9uloee7tsy4ItwRpVACsIsKnAU0p_ReNF56MEG8"/>
+</div>
+<!-- Messaging -->
+<div class="flex flex-col gap-base">
+<h2 class="text-headline-lg font-headline-lg text-on-surface">You've seen them all!</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-[280px] mx-auto">
+                    Take a paws. Check out who liked you back, or refresh the deck to discover more furry friends nearby.
+                </p>
+</div>
+<!-- Action Stack -->
+<div class="w-full flex flex-col gap-stack-gap mt-4">
+<button class="w-full bg-primary text-on-primary py-4 px-6 rounded-full text-label-lg font-label-lg flex items-center justify-center gap-2 shadow-md hover:bg-primary/90 transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                    View Matches
+                </button>
+<button class="w-full bg-surface-variant text-on-surface-variant py-4 px-6 rounded-full text-label-lg font-label-lg flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="refresh">refresh</span>
+                    Refresh Deck
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-2 pb-6 bg-surface/90 backdrop-blur-lg shadow-[0_-8px_30px_rgb(121,86,76,0.1)] rounded-t-xl z-50 hidden md:hidden flex">
+<!-- Discover (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-5 py-1.5 transition-all duration-300 transform scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="pets" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span class="text-label-sm font-label-sm mt-1">Discover</span>
+</a>
+<!-- Matches (Inactive) -->
+<a class="flex flex-col items-center justify-center text-secondary px-5 py-1.5 hover:bg-secondary-container/50 transition-all duration-300 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="text-label-sm font-label-sm mt-1">Matches</span>
+</a>
+<!-- Profile (Inactive) -->
+<a class="flex flex-col items-center justify-center text-secondary px-5 py-1.5 hover:bg-secondary-container/50 transition-all duration-300 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-label-sm font-label-sm mt-1">Profile</span>
+</a>
+</nav>
+<!-- Web Nav Alternative (Hidden on Mobile) -->
+<div class="hidden md:flex fixed top-0 left-0 w-full h-16 bg-surface z-40 items-center justify-center gap-8 shadow-sm">
+<!-- This satisfies the semantic shell rule for web layout implicitly by ensuring the bottom nav is mobile only, and top nav acts as main anchor -->
+</div>
+</body></html>

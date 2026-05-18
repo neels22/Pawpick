@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@theme {
+  --color-on-error-container: #93000a;
+  --color-on-tertiary: #ffffff;
+  --color-surface-container-high: #f3e4ed;
+  --color-on-tertiary-fixed: #002204;
+  --color-error: #ba1a1a;
+  --color-on-primary-fixed-variant: #7e273c;
+  --color-primary-fixed: #ffd9dd;
+  --color-surface: #fff7f9;
+  --color-on-secondary-container: #79574d;
+  --color-secondary: #79564c;
+  --color-surface-dim: #e5d6df;
+  --color-secondary-container: #fed0c3;
+  --color-error-container: #ffdad6;
+  --color-secondary-fixed-dim: #e9bcb0;
+  --color-on-primary: #ffffff;
+  --color-inverse-surface: #372e34;
+  --color-surface-container-highest: #eedee7;
+  --color-surface-container-lowest: #ffffff;
+  --color-inverse-on-surface: #fcecf5;
+  --color-background: #fff7f9;
+  --color-tertiary-fixed-dim: #78dc77;
+  --color-secondary-fixed: #ffdbd1;
+  --color-primary-container: #ff8da1;
+  --color-on-background: #21191f;
+  --color-outline-variant: #dac0c3;
+  --color-primary: #9c3f53;
+  --color-on-surface-variant: #554244;
+  --color-tertiary-fixed: #94f990;
+  --color-outline: #887274;
+  --color-on-error: #ffffff;
+  --color-on-primary-fixed: #400013;
+  --color-surface-variant: #eedee7;
+  --color-on-tertiary-fixed-variant: #005313;
+  --color-on-surface: #21191f;
+  --color-on-primary-container: #782338;
+  --color-tertiary-container: #61c462;
+  --color-surface-container: #f9eaf2;
+  --color-surface-tint: #9c3f53;
+  --color-primary-fixed-dim: #ffb2bd;
+  --color-on-secondary-fixed-variant: #5f3f36;
+  --color-inverse-primary: #ffb2bd;
+  --color-tertiary: #006e1c;
+  --color-surface-container-low: #ffeff8;
+  --color-on-secondary-fixed: #2d150e;
+  --color-surface-bright: #fff7f9;
+  --color-on-tertiary-container: #004e11;
+  --color-on-secondary: #ffffff;
+
+  --radius-DEFAULT: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+
+  --spacing-gutter-mobile: 16px;
+  --spacing-card-padding: 24px;
+  --spacing-base: 8px;
+  --spacing-stack-gap: 12px;
+  --spacing-margin-mobile: 20px;
+
+  --font-body-lg: "Quicksand", sans-serif;
+  --font-body-md: "Quicksand", sans-serif;
+  --font-display-lg: "Plus Jakarta Sans", sans-serif;
+  --font-headline-md: "Plus Jakarta Sans", sans-serif;
+  --font-headline-lg: "Plus Jakarta Sans", sans-serif;
+  --font-label-sm: "Quicksand", sans-serif;
+  --font-label-lg: "Quicksand", sans-serif;
+  --font-headline-sm: "Plus Jakarta Sans", sans-serif;
+  
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 26px;
+  --text-body-lg--font-weight: 500;
+  
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+  --text-body-md--font-weight: 500;
+  
+  --text-display-lg: 40px;
+  --text-display-lg--line-height: 48px;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--font-weight: 800;
+
+  --text-headline-md: 24px;
+  --text-headline-md--line-height: 32px;
+  --text-headline-md--font-weight: 700;
+
+  --text-headline-lg: 32px;
+  --text-headline-lg--line-height: 40px;
+  --text-headline-lg--font-weight: 700;
+
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 16px;
+  --text-label-sm--font-weight: 700;
+
+  --text-label-lg: 14px;
+  --text-label-lg--line-height: 20px;
+  --text-label-lg--letter-spacing: 0.01em;
+  --text-label-lg--font-weight: 700;
+
+  --text-headline-sm: 20px;
+  --text-headline-sm--line-height: 28px;
+  --text-headline-sm--font-weight: 600;
+}
+
+body {
+  overscroll-behavior-y: none;
+  min-height: max(884px, 100dvh);
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  font-family: var(--font-body-md);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.ambient-shadow {
+  box-shadow: 0 8px 30px rgba(121, 86, 76, 0.1), 0 4px 8px rgba(121, 86, 76, 0.05);
+}
+
+.squishy-button {
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,0.1), 0 4px 6px rgba(156, 63, 83, 0.2);
+  transition: all 0.2s ease;
+}
+.squishy-button:active {
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  transform: translateY(2px);
+}
+
+.snap-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: calc(100vh - 140px);
+  padding-bottom: 120px;
+}
+
+.snap-card {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+.image-gradient {
+  background: linear-gradient(to top, rgba(33, 25, 31, 0.9) 0%, rgba(33, 25, 31, 0.4) 40%, transparent 100%);
+}

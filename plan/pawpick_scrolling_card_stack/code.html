@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>PawPick - Discover</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#f3e4ed",
+                        "on-tertiary-fixed": "#002204",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#7e273c",
+                        "primary-fixed": "#ffd9dd",
+                        "surface": "#fff7f9",
+                        "on-secondary-container": "#79574d",
+                        "secondary": "#79564c",
+                        "surface-dim": "#e5d6df",
+                        "secondary-container": "#fed0c3",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#e9bcb0",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#372e34",
+                        "surface-container-highest": "#eedee7",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#fcecf5",
+                        "background": "#fff7f9",
+                        "tertiary-fixed-dim": "#78dc77",
+                        "secondary-fixed": "#ffdbd1",
+                        "primary-container": "#ff8da1",
+                        "on-background": "#21191f",
+                        "outline-variant": "#dac0c3",
+                        "primary": "#9c3f53",
+                        "on-surface-variant": "#554244",
+                        "tertiary-fixed": "#94f990",
+                        "outline": "#887274",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#400013",
+                        "surface-variant": "#eedee7",
+                        "on-tertiary-fixed-variant": "#005313",
+                        "on-surface": "#21191f",
+                        "on-primary-container": "#782338",
+                        "tertiary-container": "#61c462",
+                        "surface-container": "#f9eaf2",
+                        "surface-tint": "#9c3f53",
+                        "primary-fixed-dim": "#ffb2bd",
+                        "on-secondary-fixed-variant": "#5f3f36",
+                        "inverse-primary": "#ffb2bd",
+                        "tertiary": "#006e1c",
+                        "surface-container-low": "#ffeff8",
+                        "on-secondary-fixed": "#2d150e",
+                        "surface-bright": "#fff7f9",
+                        "on-tertiary-container": "#004e11",
+                        "on-secondary": "#ffffff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "gutter-mobile": "16px",
+                        "card-padding": "24px",
+                        "base": "8px",
+                        "stack-gap": "12px",
+                        "margin-mobile": "20px"
+                    },
+                    fontFamily: {
+                        "body-lg": ["Quicksand"],
+                        "body-md": ["Quicksand"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Quicksand"],
+                        "label-lg": ["Quicksand"],
+                        "headline-sm": ["Plus Jakarta Sans"]
+                    },
+                    fontSize: {
+                        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "700" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            /* Prevent overscroll bounce on mobile */
+            overscroll-behavior-y: none;
+        }
+        
+        /* Hide scrollbar for cleaner look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        /* Ambient Depth for cards */
+        .ambient-shadow {
+            box-shadow: 0 8px 30px rgba(121, 86, 76, 0.1), 0 4px 8px rgba(121, 86, 76, 0.05);
+        }
+        
+        /* Soft, floating button effect */
+        .squishy-button {
+            box-shadow: inset 0 -2px 0 rgba(0,0,0,0.1), 0 4px 6px rgba(156, 63, 83, 0.2);
+            transition: all 0.2s ease;
+        }
+        .squishy-button:active {
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+            transform: translateY(2px);
+        }
+        
+        /* Snap scrolling container */
+        .snap-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: calc(100vh - 140px); /* Adjust based on top/bottom nav heights */
+            padding-bottom: 120px; /* Space for bottom nav */
+        }
+        
+        .snap-card {
+            scroll-snap-align: center;
+            scroll-snap-stop: always;
+        }
+        
+        /* Gradient overlay for image text legibility */
+        .image-gradient {
+            background: linear-gradient(to top, rgba(33, 25, 31, 0.9) 0%, rgba(33, 25, 31, 0.4) 40%, transparent 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased font-body-md h-screen overflow-hidden flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-background flex justify-between items-center px-margin-mobile py-4 w-full z-10 shrink-0">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined font-display-lg text-display-lg" style="font-variation-settings: 'FILL' 1;">pets</span>
+<h1 class="font-headline-sm text-headline-sm font-bold tracking-tight">PawPick</h1>
+</div>
+<button class="text-primary hover:bg-surface-container-low transition-colors rounded-full p-2 scale-95 duration-100 flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">tune</span>
+</button>
+</header>
+<!-- Main Scrollable Content Area -->
+<main class="snap-container no-scrollbar flex-1 relative w-full max-w-md mx-auto">
+<!-- Card 1 -->
+<div class="snap-card w-full h-full flex flex-col items-center justify-center p-gutter-mobile pt-2 pb-8">
+<div class="relative w-full h-[663px] max-h-[700px] bg-surface-container-highest rounded-[24px] ambient-shadow overflow-hidden flex flex-col group">
+<!-- Pet Image -->
+<div class="relative w-full h-full bg-surface-dim">
+<img alt="A high-quality, professional photograph of an energetic, fluffy Golden Retriever puppy looking directly at the camera with a playful expression. The puppy is set against a soft, bright background that emphasizes its nurturing and friendly personality. The lighting is soft and high-key, complementing a modern, light-mode UI aesthetic filled with cream and pale pink tones. The image captures a tactile, huggable quality central to the brand's minimalist yet vibrant identity." class="w-full h-full object-cover rounded-t-[24px]" data-alt="A high-quality, professional photograph of an energetic, fluffy Golden Retriever puppy looking directly at the camera with a playful expression. The puppy is set against a soft, bright background that emphasizes its nurturing and friendly personality. The lighting is soft and high-key, complementing a modern, light-mode UI aesthetic filled with cream and pale pink tones. The image captures a tactile, huggable quality central to the brand's minimalist yet vibrant identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJqJk6eO102L6qnTx2wA01i6dsjtXb6yFZdXFYQqxX0WiLVmhnBkVdZMZNC5SvhhOQUZJGvDWYbeb_q1pZnK1s_MnTzCdhJRsQbjajWr4oz4WLh01WVcdTNY2wrZtadg9OOzvz2KiBPANFfoFioeU6CMC0La63ZdETQRU9J9GAxRyw4sSrjucv-KhgZ_IrkiFWDOxUBWRqO-PytU1rOJqLskbp_GSUxtR0DYTMBYeNMtalhbsQAQZv6NFZIKOLHN6heNlUYNIKMXk"/>
+<!-- Gradient Overlay -->
+<div class="absolute inset-0 image-gradient rounded-b-[24px]"></div>
+</div>
+<!-- Pet Info Overlay -->
+<div class="absolute bottom-0 w-full p-card-padding text-on-tertiary flex flex-col gap-stack-gap z-10 pb-[80px]">
+<div class="flex items-end justify-between">
+<div>
+<h2 class="font-display-lg text-display-lg m-0 leading-none">Cooper <span class="font-headline-md text-headline-md font-normal opacity-90">· 2</span></h2>
+<p class="font-body-md text-body-md opacity-90 mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span> 2 miles away
+                            </p>
+</div>
+</div>
+<!-- Traits Chips -->
+<div class="flex flex-wrap gap-2 mt-2">
+<span class="bg-primary-container/30 text-surface-bright px-3 py-1 rounded-full font-label-lg text-label-lg border border-primary-container/50 backdrop-blur-sm">Energetic</span>
+<span class="bg-primary-container/30 text-surface-bright px-3 py-1 rounded-full font-label-lg text-label-lg border border-primary-container/50 backdrop-blur-sm">Good with kids</span>
+</div>
+<p class="font-body-md text-body-md mt-2 line-clamp-2 opacity-90">
+                        Loves long walks, belly rubs, and trying to catch his own tail. Looking for a family that can match his energy!
+                    </p>
+</div>
+<!-- Floating Action Buttons -->
+<div class="absolute bottom-6 w-full flex justify-center items-center gap-6 z-20 px-card-padding">
+<!-- Pass Button -->
+<button aria-label="Pass" class="w-14 h-14 rounded-full bg-surface-container-lowest text-on-surface-variant flex items-center justify-center ambient-shadow transform transition-transform hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined text-3xl" style="color: #ba1a1a;">close</span>
+</button>
+<!-- Super Like -->
+<button aria-label="Super Like" class="w-12 h-12 rounded-full bg-surface-container-highest text-primary flex items-center justify-center ambient-shadow transform transition-transform hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<!-- Like Button -->
+<button aria-label="Like" class="w-16 h-16 rounded-full bg-primary text-on-primary flex items-center justify-center ambient-shadow squishy-button">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="snap-card w-full h-full flex flex-col items-center justify-center p-gutter-mobile pt-2 pb-8">
+<div class="relative w-full h-[663px] max-h-[700px] bg-surface-container-highest rounded-[24px] ambient-shadow overflow-hidden flex flex-col">
+<!-- Pet Image -->
+<div class="relative w-full h-full bg-surface-dim">
+<img alt="A striking portrait of a sleek, curious cat sitting elegantly on a soft, textured cream blanket. The lighting is soft and directional, creating a warm, approachable atmosphere that highlights the cat's soft fur and bright eyes. The background consists of very soft, blurred pale pinks and beiges, aligning with a nurturing, haptic minimalist design aesthetic. The overall mood is calm, intimate, and highly engaging." class="w-full h-full object-cover rounded-t-[24px]" data-alt="A striking portrait of a sleek, curious cat sitting elegantly on a soft, textured cream blanket. The lighting is soft and directional, creating a warm, approachable atmosphere that highlights the cat's soft fur and bright eyes. The background consists of very soft, blurred pale pinks and beiges, aligning with a nurturing, haptic minimalist design aesthetic. The overall mood is calm, intimate, and highly engaging." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmsx5pw6KVxsYzjbK1Z7zDTzP7KihKeOup2uapMechnFuBJIMJNBbH_0DZak5a3qJSvHBIU0w09xVkxc5nqtairL2oevtF8tlUNjYO2xWLhY0U8w40rehdFEdGk1o2aP4341OHOCZ3jMBXk_xNYugdeCjKYB5BG-U-QcnZcmUgWJuDl5VFfs3pu1m3ho4i9IDQiDkGEE_wL-nUIqUbIlNgz48pvLrE5fsQ96heQDq6IoUql8W1Y2m5HenBLVrGfZLFDi4AF830xdY"/>
+<!-- Gradient Overlay -->
+<div class="absolute inset-0 image-gradient rounded-b-[24px]"></div>
+</div>
+<!-- Pet Info Overlay -->
+<div class="absolute bottom-0 w-full p-card-padding text-on-tertiary flex flex-col gap-stack-gap z-10 pb-[80px]">
+<div class="flex items-end justify-between">
+<div>
+<h2 class="font-display-lg text-display-lg m-0 leading-none">Luna <span class="font-headline-md text-headline-md font-normal opacity-90">· 3</span></h2>
+<p class="font-body-md text-body-md opacity-90 mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span> 5 miles away
+                            </p>
+</div>
+</div>
+<!-- Traits Chips -->
+<div class="flex flex-wrap gap-2 mt-2">
+<span class="bg-primary-container/30 text-surface-bright px-3 py-1 rounded-full font-label-lg text-label-lg border border-primary-container/50 backdrop-blur-sm">Independent</span>
+<span class="bg-primary-container/30 text-surface-bright px-3 py-1 rounded-full font-label-lg text-label-lg border border-primary-container/50 backdrop-blur-sm">Cuddler</span>
+</div>
+<p class="font-body-md text-body-md mt-2 line-clamp-2 opacity-90">
+                        A quiet companion who enjoys sunbeams and judging you from atop high shelves. Warms up quickly with treats.
+                    </p>
+</div>
+<!-- Floating Action Buttons -->
+<div class="absolute bottom-6 w-full flex justify-center items-center gap-6 z-20 px-card-padding">
+<!-- Pass Button -->
+<button aria-label="Pass" class="w-14 h-14 rounded-full bg-surface-container-lowest text-on-surface-variant flex items-center justify-center ambient-shadow transform transition-transform hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined text-3xl" style="color: #ba1a1a;">close</span>
+</button>
+<!-- Super Like -->
+<button aria-label="Super Like" class="w-12 h-12 rounded-full bg-surface-container-highest text-primary flex items-center justify-center ambient-shadow transform transition-transform hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<!-- Like Button -->
+<button aria-label="Like" class="w-16 h-16 rounded-full bg-primary text-on-primary flex items-center justify-center ambient-shadow squishy-button">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container-low shadow-[0_-8px_30px_rgba(121,86,76,0.05)] rounded-t-xl md:hidden">
+<!-- Tab 1: Discover (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-5 py-1 scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="font-label-lg text-label-lg mt-1">Discover</span>
+</a>
+<!-- Tab 2: Matches (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-secondary-container opacity-70 hover:bg-secondary-container/50 transition-all px-4 py-1 rounded-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">pets</span>
+<span class="font-label-lg text-label-lg mt-1">Matches</span>
+</a>
+<!-- Tab 3: Profile (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-secondary-container opacity-70 hover:bg-secondary-container/50 transition-all px-4 py-1 rounded-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+<span class="font-label-lg text-label-lg mt-1">Profile</span>
+</a>
+</nav>
+<!-- Desktop Web Nav Container (Hidden on Mobile) -->
+<div class="hidden md:flex fixed top-0 w-full bg-surface-container-low py-4 px-8 justify-between items-center z-50 shadow-[0_8px_30px_rgba(121,86,76,0.05)]">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined font-display-lg text-display-lg" style="font-variation-settings: 'FILL' 1;">pets</span>
+<h1 class="font-headline-sm text-headline-sm font-bold tracking-tight">PawPick</h1>
+</div>
+<div class="flex gap-8">
+<a class="font-label-lg text-label-lg text-primary font-bold border-b-2 border-primary pb-1" href="#">Discover</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors" href="#">Matches</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors" href="#">Profile</a>
+</div>
+</div>
+</body></html>

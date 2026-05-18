@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PawPick - Your Matches</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "surface": "#fff7f9",
+                        "on-tertiary-fixed-variant": "#005313",
+                        "surface-variant": "#eedee7",
+                        "secondary-container": "#fed0c3",
+                        "surface-container-high": "#f3e4ed",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#eedee7",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#fcecf5",
+                        "on-primary-container": "#782338",
+                        "on-tertiary-fixed": "#002204",
+                        "surface-container-low": "#ffeff8",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#fff7f9",
+                        "on-secondary-container": "#79574d",
+                        "error": "#ba1a1a",
+                        "primary": "#9c3f53",
+                        "secondary": "#79564c",
+                        "outline-variant": "#dac0c3",
+                        "surface-dim": "#e5d6df",
+                        "background": "#fff7f9",
+                        "primary-fixed-dim": "#ffb2bd",
+                        "outline": "#887274",
+                        "on-secondary-fixed": "#2d150e",
+                        "surface-tint": "#9c3f53",
+                        "tertiary-container": "#61c462",
+                        "secondary-fixed": "#ffdbd1",
+                        "surface-container": "#f9eaf2",
+                        "primary-fixed": "#ffd9dd",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#5f3f36",
+                        "on-tertiary-container": "#004e11",
+                        "on-surface-variant": "#554244",
+                        "on-surface": "#21191f",
+                        "tertiary": "#006e1c",
+                        "secondary-fixed-dim": "#e9bcb0",
+                        "tertiary-fixed-dim": "#78dc77",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#7e273c",
+                        "tertiary-fixed": "#94f990",
+                        "inverse-surface": "#372e34",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#400013",
+                        "inverse-primary": "#ffb2bd",
+                        "on-background": "#21191f",
+                        "primary-container": "#ff8da1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "card-padding": "24px",
+                        "gutter-mobile": "16px",
+                        "stack-gap": "12px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Quicksand"],
+                        "label-lg": ["Quicksand"],
+                        "body-lg": ["Quicksand"],
+                        "body-md": ["Quicksand"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom Dual Shadow for Ambient Depth */
+        .ambient-shadow {
+            box-shadow: 0 30px 40px -10px rgba(121, 86, 76, 0.08), 0 8px 16px -4px rgba(121, 86, 76, 0.04);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-background bg-surface/80 backdrop-blur-md flex justify-between items-center px-margin-mobile h-16 w-full">
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-container-high overflow-hidden shrink-0">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A close-up, soft-lit portrait photograph of a smiling young woman with warm lighting, framed in a circular avatar container against a bright, modern minimalist app interface background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7DVMHeSaYx_K-gYHsEx_NdxRXTa0ANvRVkmnlM3tQubsX0zXvgjSVlDfrATWo5mhLCOqlosuU6Kof3IEClwKnOL_C-FTwgavagW7TruQ92tuyIMG6XHUyMtrMFdLyJECEqHHWGGk2jlJARcBuo1nSTovsB0igJDFcI2tTM1lqzzKm8py8T_852vWxE6eA2w9mxPcu71YNfKpzYcQ5Swu3GElBiIqNlw2wZuFR6fmMeDd0hLOXGY6f7N5EF4OIwu3Z3xprUVYCd7A"/>
+</div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed text-center flex-1">
+            PawPick
+        </h1>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-full shrink-0">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 pt-24 pb-32 px-margin-mobile overflow-y-auto">
+<!-- Header Section -->
+<div class="mb-6 flex justify-between items-end">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mb-1">Your Matches</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Pets waiting to say hello!</p>
+</div>
+<div class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-label-sm font-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">favorite</span>
+                4 New
+            </div>
+</div>
+<!-- Bento Grid of Matches -->
+<div class="grid grid-cols-2 gap-gutter-mobile">
+<!-- Match Card 1 (New) -->
+<article class="bg-surface rounded-[24px] ambient-shadow flex flex-col overflow-hidden relative group">
+<!-- New Badge -->
+<div class="absolute top-3 right-3 bg-primary text-on-primary text-[10px] font-label-sm px-2 py-0.5 rounded-full z-10 shadow-sm">
+                    NEW
+                </div>
+<div class="relative h-40 w-full overflow-hidden">
+<img alt="Golden Retriever Puppy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A high-quality, bright photograph of an energetic Golden Retriever puppy sitting on a sunny lawn. The image is bathed in warm, soft natural light fitting the playful and nurturing brand aesthetic. The puppy looks directly at the camera with a happy expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAFvx_MNATNdDGjMGX260sgMnKgvVynPGPG-WazJSALF3NCO6nTQUZXvCrGUkh6Z0-yyGoNle0Pa2OKhcdBZ2BlHn616FkKrmZjmPFVRHj4LXc79xQ5tp3ApueAPF1JBdTACo-YuCCuekT_F68myjLqQ4g9OqZmW4pIPxM3riDneD28WHjHpNwCI80mgQa90s3vALu23YBRyB8UNQwajA7YQhBr5TN2rEIDzRs__s7_sEChL6EW_ZHnYGLVcT5RchaER6H07zlCYY"/>
+<!-- Subtle gradient overlay for better text contrast if we had text over image, but we don't here. Keeping for tactile feel -->
+<div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-center mb-1">
+<h3 class="text-headline-sm font-headline-sm text-on-surface truncate">Barnaby</h3>
+<span class="text-body-sm font-body-md text-on-surface-variant shrink-0">3m</span>
+</div>
+<p class="text-label-sm font-label-sm text-secondary mb-3 truncate">Golden Retriever</p>
+<button class="mt-auto w-full bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface py-2.5 rounded-full text-label-lg font-label-lg transition-colors flex justify-center items-center gap-2 group-hover:bg-primary-container group-hover:text-on-primary-container">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                        Chat
+                    </button>
+</div>
+</article>
+<!-- Match Card 2 -->
+<article class="bg-surface rounded-[24px] ambient-shadow flex flex-col overflow-hidden relative group">
+<div class="relative h-40 w-full overflow-hidden">
+<img alt="Fluffy White Cat" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A soft, high-key photograph of a fluffy white Persian cat lounging comfortably indoors. The lighting is diffused and warm, emphasizing the cat's soft fur and calm demeanor, matching the hugging, squishy UI design language. Minimalist background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1-azOINQwQwIe-r7ocGQM5IT66v1ZsKfRLoAMQ3HgV1aqNWZr3pvZhE_X_oD5hNfzgTRVfHN0l_6OXrfipQnNRFMN2fAMGvs6UoI_isi-F54ZVTCGKnFUTUx5EMWr9R8TFwJ-avc_egGJ7qbCmJVR8gKGGRcoy-sqMlkEympeenMFkqd95aXrlloSUGrUgkRvb9ij1lAyUAhha7bWhmigeGOvMyBA0jLYoaSqokWbpkS1QN5fCPJjVmPh7gcpkciYtE2jl6myerc"/>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-center mb-1">
+<h3 class="text-headline-sm font-headline-sm text-on-surface truncate">Snowball</h3>
+<span class="text-body-sm font-body-md text-on-surface-variant shrink-0">2y</span>
+</div>
+<p class="text-label-sm font-label-sm text-secondary mb-3 truncate">Persian Mix</p>
+<button class="mt-auto w-full bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface py-2.5 rounded-full text-label-lg font-label-lg transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                        Chat
+                    </button>
+</div>
+</article>
+<!-- Match Card 3 -->
+<article class="bg-surface rounded-[24px] ambient-shadow flex flex-col overflow-hidden relative group">
+<div class="relative h-40 w-full overflow-hidden">
+<img alt="French Bulldog" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A vibrant, playful photo of a small brown French Bulldog with perked ears, looking curiously into the lens. The background is a soft, out-of-focus pastel tone that complements the app's primary pink and cream palette. Bright, cheerful lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDc1DPeBp0vzZ9fEyn8xF8XeOSO9p-c2ADn-E-4bj_zXpZG0Gxhu8IBKECb32KbzDBL-jzKLfQkGs1TgDqS5fMW6iE-hvFf9qYLUlrvJtoOvh5bceyZM5FLjVf2_VKg4IGBvOwRpAGhTgmIn6uRbYbyOjQd99Z9_0fYrP30jHlGeUuUSmyYlvB87RnejCvSmVgL3VGULZ5i7i6b3kWtmR-NSClAoMB0R90fw_vI8-7Sc9KDJJftb5ZXL8cnNOAznold26-OQRUgI7s"/>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-center mb-1">
+<h3 class="text-headline-sm font-headline-sm text-on-surface truncate">Winston</h3>
+<span class="text-body-sm font-body-md text-on-surface-variant shrink-0">1y</span>
+</div>
+<p class="text-label-sm font-label-sm text-secondary mb-3 truncate">Frenchie</p>
+<button class="mt-auto w-full bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface py-2.5 rounded-full text-label-lg font-label-lg transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                        Chat
+                    </button>
+</div>
+</article>
+<!-- Match Card 4 -->
+<article class="bg-surface rounded-[24px] ambient-shadow flex flex-col overflow-hidden relative group">
+<div class="relative h-40 w-full overflow-hidden">
+<img alt="Orange Tabby Cat" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A charming, close-up photograph of an orange tabby cat sleeping peacefully on a soft blanket. The aesthetic is cozy, nurturing, and utilizes soft focus to create an intimate, tactile feel aligned with the app's hugging UI theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsICKMX5SiwJNDxWBJFVhsuIVoxzUSJxSZ6Lf98GMaGT4IOf0z4yKETxws0yWQGuAQOrgJSjyhu-x2y_E8qEeBmQaUmskK95GUInYjBm4DMbHFriBOF7Z3-EuDYaPrT2P66XxKQqVjRj52RvA8rdumGDOlnOVNo4B6WG-NlsLYiFmppZGn-019Pgh93OVm7pDn_rOirJpG8lNeFz2q5rpMZEI8TkINnYisAWVhLhk8dN6cUP4bKsh4r9gXShTypIe8YHrHpZNXMBE"/>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-center mb-1">
+<h3 class="text-headline-sm font-headline-sm text-on-surface truncate">Marmalade</h3>
+<span class="text-body-sm font-body-md text-on-surface-variant shrink-0">4y</span>
+</div>
+<p class="text-label-sm font-label-sm text-secondary mb-3 truncate">Domestic Shorthair</p>
+<button class="mt-auto w-full bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface py-2.5 rounded-full text-label-lg font-label-lg transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                        Chat
+                    </button>
+</div>
+</article>
+</div>
+<!-- Empty State / Loading more hint -->
+<div class="mt-8 text-center pb-8">
+<p class="text-body-md font-body-md text-outline">Keep swiping to find more friends!</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface dark:bg-background bg-surface/90 backdrop-blur-lg shadow-[0_-8px_30px_rgb(121,86,76,0.1)] fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-2 pb-6">
+<!-- Discover (Inactive) -->
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-5 py-1.5 hover:bg-secondary-container/50 transition-all duration-300 rounded-full group">
+<span class="material-symbols-outlined text-[24px] mb-1 group-hover:-translate-y-0.5 transition-transform">pets</span>
+<span class="text-label-sm font-label-sm">Discover</span>
+</button>
+<!-- Matches (Active) -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-5 py-1.5 hover:bg-secondary-container/50 transition-all duration-300 scale-90 transition-all duration-200 ease-out">
+<span class="material-symbols-outlined icon-fill text-[24px] mb-1">favorite</span>
+<span class="text-label-sm font-label-sm">Matches</span>
+</button>
+<!-- Profile (Inactive) -->
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-5 py-1.5 hover:bg-secondary-container/50 transition-all duration-300 rounded-full group">
+<span class="material-symbols-outlined text-[24px] mb-1 group-hover:-translate-y-0.5 transition-transform">person</span>
+<span class="text-label-sm font-label-sm">Profile</span>
+</button>
+</nav>
+</body></html>
