@@ -9,6 +9,7 @@ An honest reflection on the use of AI tools during the development of PawPick.
 The **Antigravity AI Agent** (powered by the **Gemini** models) and various code-generation LLMs were used throughout the development of PawPick, primarily for:
 
 - **Project scaffolding** — Generating the initial component structure, Prisma schema, and seed script based on the PRD specification.
+- **UI Design** — The user interface was initially conceptualized and designed using the Google Stitch application before being translated to code.
 - **API route implementation** — Drafting the three API endpoints (items, vote, results) including validation logic and sort algorithms.
 - **Frontend components** — Building React components with Framer Motion gestures, translating design templates into functional TSX.
 - **Styling** — Translating design tokens from the provided `DESIGN.md` into Tailwind CSS custom theme configuration.
