@@ -8,14 +8,11 @@ import SwipeCard from '@/components/SwipeCard'
 import ResultsView from '@/components/ResultsView'
 import EmptyDeck from '@/components/EmptyDeck'
 
-type ViewMode = 'swipe' | 'results'
-
 export default function Home() {
   const [sessionId, setSessionId] = useState<string | null>(null)
   const [items, setItems] = useState<Item[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [loading, setLoading] = useState(true)
-  const [view, setView] = useState<ViewMode>('swipe')
   const [voting, setVoting] = useState(false)
   const cardTimestamp = useRef<number>(Date.now())
 
@@ -72,57 +69,73 @@ export default function Home() {
   )
 
   // 4. Navigation
-  const openResults = useCallback(() => setView('results'), [])
-  const backToSwipe = useCallback(() => setView('swipe'), [])
+  const swipeRef = useRef<HTMLElement>(null)
+  const resultsRef = useRef<HTMLElement>(null)
+
+  const openResults = useCallback(() => {
+    resultsRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [])
+  
+  const backToSwipe = useCallback(() => {
+    swipeRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [])
 
   // Determine what to render
   const currentItem = items[currentIndex] ?? null
   const allVoted = !loading && items.length > 0 && currentIndex >= items.length
   const emptyFromStart = !loading && items.length === 0
 
-  // ─── Results View ──────────────────────────────────────────────
-  if (view === 'results') {
-    return (
-      <div className="flex flex-col h-screen max-w-md mx-auto overflow-hidden">
-        <ResultsView onBackToSwipe={backToSwipe} />
-      </div>
-    )
-  }
-
-  // ─── Swipe View ────────────────────────────────────────────────
   return (
-    <div className="flex flex-col h-screen max-w-md mx-auto overflow-hidden">
-      <ProgressHeader
-        currentIndex={currentIndex + 1}
-        totalItems={items.length || 100}
-        onOpenResults={openResults}
-      />
-
-      <main className="flex-1 flex flex-col items-center justify-center px-[var(--spacing-gutter-mobile)] pb-8 overflow-hidden">
-        {/* Loading State */}
-        {loading && (
-          <div className="flex flex-col items-center justify-center gap-4">
-            <div className="w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
-            <p className="text-on-surface-variant text-[16px] font-bold">
-              Finding adorable pets...
-            </p>
-          </div>
-        )}
-
-        {/* All voted or empty from start */}
-        {(allVoted || emptyFromStart) && (
-          <EmptyDeck onViewResults={openResults} />
-        )}
-
-        {/* Current card */}
-        {!loading && currentItem && (
-          <SwipeCard
-            item={currentItem}
-            onVote={handleVote}
+    <div className="h-[100dvh] w-full overflow-y-auto overflow-x-hidden snap-y snap-mandatory scroll-smooth bg-background">
+      {/* ─── Swipe View ──────────────────────────────────────────────── */}
+      <section
+        ref={swipeRef}
+        className="h-[100dvh] w-full snap-start shrink-0 flex flex-col relative"
+      >
+        <div className="flex flex-col h-full max-w-md mx-auto w-full overflow-hidden">
+          <ProgressHeader
+            currentIndex={currentIndex + 1}
+            totalItems={items.length || 100}
             onOpenResults={openResults}
           />
-        )}
-      </main>
+
+          <main className="flex-1 flex flex-col items-center justify-center px-[var(--spacing-gutter-mobile)] pb-8 overflow-hidden">
+            {/* Loading State */}
+            {loading && (
+              <div className="flex flex-col items-center justify-center gap-4">
+                <div className="w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
+                <p className="text-on-surface-variant text-[16px] font-bold">
+                  Finding adorable pets...
+                </p>
+              </div>
+            )}
+
+            {/* All voted or empty from start */}
+            {(allVoted || emptyFromStart) && (
+              <EmptyDeck onViewResults={openResults} />
+            )}
+
+            {/* Current card */}
+            {!loading && currentItem && (
+              <SwipeCard
+                item={currentItem}
+                onVote={handleVote}
+                onOpenResults={openResults}
+              />
+            )}
+          </main>
+        </div>
+      </section>
+
+      {/* ─── Results View ────────────────────────────────────────────── */}
+      <section
+        ref={resultsRef}
+        className="h-[100dvh] w-full snap-start shrink-0 flex flex-col relative bg-surface"
+      >
+        <div className="flex flex-col h-full max-w-md mx-auto w-full overflow-hidden">
+          <ResultsView onBackToSwipe={backToSwipe} />
+        </div>
+      </section>
     </div>
   )
 }

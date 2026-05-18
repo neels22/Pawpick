@@ -11,9 +11,10 @@ interface SwipeCardProps {
 }
 
 export default function SwipeCard({ item, onVote, onOpenResults }: SwipeCardProps) {
-  const [exiting, setExiting] = useState<'left' | 'right' | null>(null)
+  const [exiting, setExiting] = useState<'left' | 'right' | 'down' | null>(null)
 
   const x = useMotionValue(0)
+  const y = useMotionValue(0)
   const rotate = useTransform(x, [-300, 0, 300], [-18, 0, 18])
   const greenOpacity = useTransform(x, [0, 100], [0, 0.5])
   const redOpacity = useTransform(x, [-100, 0], [0.5, 0])
@@ -24,7 +25,8 @@ export default function SwipeCard({ item, onVote, onOpenResults }: SwipeCardProp
   useEffect(() => {
     setExiting(null)
     x.set(0)
-  }, [item.id, x])
+    y.set(0)
+  }, [item.id, x, y])
 
   const triggerVote = useCallback((choice: 'yes' | 'no') => {
     const direction = choice === 'yes' ? 'right' : 'left'
@@ -38,7 +40,8 @@ export default function SwipeCard({ item, onVote, onOpenResults }: SwipeCardProp
   ) {
     // Downward drag → open results (no vote)
     if (info.offset.y > 120) {
-      onOpenResults()
+      setExiting('down')
+      setTimeout(() => onOpenResults(), 300)
       return
     }
 
@@ -71,11 +74,12 @@ export default function SwipeCard({ item, onVote, onOpenResults }: SwipeCardProp
           dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
           dragElastic={0.9}
           onDragEnd={handleDragEnd}
-          style={{ x, rotate }}
+          style={{ x, y, rotate }}
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1, transition: { duration: 0.3 } }}
           exit={{
             x: exiting === 'right' ? 500 : exiting === 'left' ? -500 : 0,
+            y: exiting === 'down' ? 800 : 0,
             rotate: exiting === 'right' ? 20 : exiting === 'left' ? -20 : 0,
             opacity: 0,
             transition: { duration: 0.3 },
